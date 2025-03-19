@@ -11,7 +11,11 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.login_view, name='login_view'),
     path('logout/', views.logout_view, name='logout_view'),
+<<<<<<< HEAD
     path('register/', views.register_view, name='register_view'),
+=======
+    path('register/', views.register, name='register'),
+>>>>>>> ffef4652497431953d070e397f57e1f455123291
     path('buses/<int:pk>/', bus_detail, name='bus_detail'),
 
     # Schedule views

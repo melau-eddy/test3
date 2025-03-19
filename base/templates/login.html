@@ -10,6 +10,7 @@
         </div>
         <form class="mt-8 space-y-6" method="post">
             {% csrf_token %}
+<<<<<<< HEAD
             {% if form.errors %}
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md mb-4">
                     <p>Invalid username or password. Please try again.</p>
@@ -19,12 +20,24 @@
                 <div>
                     <label for="id_username" class="sr-only">Username</label>
                     <input id="id_username" name="username" type="text" required
+=======
+            <input type="hidden" name="remember" value="true">
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                    <label for="username" class="sr-only">Username</label>
+                    <input id="username" name="username" type="text" required
+>>>>>>> ffef4652497431953d070e397f57e1f455123291
                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                            placeholder="Username">
                 </div>
                 <div>
+<<<<<<< HEAD
                     <label for="id_password" class="sr-only">Password</label>
                     <input id="id_password" name="password" type="password" required
+=======
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password" type="password" required
+>>>>>>> ffef4652497431953d070e397f57e1f455123291
                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                            placeholder="Password">
                 </div>
@@ -57,7 +70,11 @@
         <div class="text-center">
             <p class="text-sm text-gray-600">
                 Don't have an account?
+<<<<<<< HEAD
                 <a href="{% url 'register_view' %}" class="font-medium text-blue-600 hover:text-blue-500">
+=======
+                <a href="{% url 'register' %}" class="font-medium text-blue-600 hover:text-blue-500">
+>>>>>>> ffef4652497431953d070e397f57e1f455123291
                     Sign up
                 </a>
             </p>

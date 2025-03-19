@@ -4,8 +4,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import Bus, Route, Schedule, Booking, Payment
+<<<<<<< HEAD
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+=======
+>>>>>>> ffef4652497431953d070e397f57e1f455123291
 
 # View to list all buses
 
@@ -14,6 +17,7 @@ def home(request):
 
 
 def login_view(request):
+<<<<<<< HEAD
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -46,6 +50,57 @@ def register_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+=======
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            messages.success(request, 'Login successful')
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid username or password')
+            return redirect('login_view')
+
+    return render(request, 'login.html')
+
+
+def register(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        username = request.POST.get("username")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+
+        if not email:
+            messages.error(request, "email is required.")
+            return redirect("register")
+        
+        if not username:
+            messages.error(request, "username  is required.")
+            return redirect("register")
+
+
+        if password1 != password2:
+            messages.error(request, "Passwords do not match.")
+            return redirect("register")
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Student with that registration number already exists, continue to login.")
+            return redirect("register")
+
+        user = User.objects.create_user(username=username, email=email, password=password1)
+        user.save()
+
+        Voter.objects.create(user=user)
+        
+        messages.success(request, "Account created successfully. Please log in.")
+        return redirect("login_view")
+
+    return render(request, "register.html")
+>>>>>>> ffef4652497431953d070e397f57e1f455123291
 
 def bus_list(request):
     buses = Bus.objects.all()
