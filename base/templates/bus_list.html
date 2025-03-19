@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Bus List</h1>
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {% for bus in buses %}
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <!-- Bus Image -->
+        {% if bus.image %}
+            <img src="{{ bus.image.url }}" alt="{{ bus.bus_name }}" class="w-full h-48 object-cover rounded-md mb-4">
+        {% else %}
+            <div class="w-full h-48 bg-gray-200 rounded-md mb-4 flex items-center justify-center text-gray-500">
+                No Image Available
+            </div>
+        {% endif %}
+
+        <!-- Bus Details -->
+        <h2 class="text-xl font-semibold">{{ bus.bus_name }} ({{ bus.bus_number }})</h2>
+        <p class="text-gray-600">Amenities: {{ bus.amenities }}</p>
+        <p class="text-gray-600">Total Seats: {{ bus.total_seats }}</p>
+        <a href="{% url 'bus_detail' bus.id %}" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">View Details</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

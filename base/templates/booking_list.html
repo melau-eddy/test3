@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">My Bookings</h1>
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {% for booking in bookings %}
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold">{{ booking.schedule.bus.bus_name }}</h2>
+        <p class="text-gray-600">{{ booking.schedule.route.source }} to {{ booking.schedule.route.destination }}</p>
+        <p class="text-gray-600">Seats: {{ booking.seats_booked }}</p>
+        <p class="text-gray-600">Total Price: {{ booking.total_price }}</p>
+        <a href="{% url 'booking_delete' booking.id %}" class="mt-4 inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Cancel Booking</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

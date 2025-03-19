@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">{{ bus.bus_name }} ({{ bus.bus_number }})</h1>
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <p class="text-gray-600">Amenities: {{ bus.amenities }}</p>
+    <p class="text-gray-600">Total Seats: {{ bus.total_seats }}</p>
+
+    <!-- Seating Layout -->
+    <div class="mt-6">
+        <h2 class="text-xl font-semibold mb-4">Seating Layout</h2>
+        
+        <!-- Bus Layout -->
+        <div class="flex flex-col items-center">
+            <!-- Door -->
+            <div class="w-16 h-8 bg-gray-400 text-white text-center py-2 rounded-t-lg mb-4">
+                Door
+            </div>
+
+            <!-- Seats -->
+            <div class="grid grid-cols-4 gap-4">
+                {% for seat_number in seat_range %}
+                    {% if seat_number in booked_seats %}
+                        <!-- Booked Seat -->
+                        <div class="bg-blue-500 text-white text-center p-4 rounded-md">
+                            Seat {{ seat_number }} (Booked)
+                        </div>
+                    {% else %}
+                        <!-- Available Seat -->
+                        <a href="{% url 'booking_create' bus.id seat_number %}" class="bg-gray-200 text-gray-700 text-center p-4 rounded-md hover:bg-gray-300 cursor-pointer">
+                            {% if seat_number in window_seats %}
+                                Seat {{ seat_number }} (Window)
+                            {% else %}
+                                Seat {{ seat_number }}
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Bus List -->
+    <a href="{% url 'bus_list' %}" class="mt-6 inline-block bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Back to Bus List</a>
+</div>
+{% endblock %}

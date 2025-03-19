@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Book Seat {{ seat_number }}</h1>
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <p class="text-gray-600">Bus: {{ bus.bus_name }} ({{ bus.bus_number }})</p>
+    <p class="text-gray-600">Seat: {{ seat_number }}</p>
+    <p class="text-gray-600">Price: {{ schedule.price }}</p>
+
+    <!-- Booking Form -->
+    <form method="post" class="mt-6">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="name" class="block text-gray-700">Name:</label>
+            <input type="text" id="name" name="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700">Email:</label>
+            <input type="email" id="email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Confirm Booking</button>
+    </form>
+</div>
+{% endblock %}
